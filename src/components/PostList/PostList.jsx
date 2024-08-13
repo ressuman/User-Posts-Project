@@ -4,31 +4,53 @@ import Post from "../Post/Post";
 import classes from "./PostList.module.css";
 import { Modal } from "../Modal/Modal";
 
-export default function PostList() {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
+export default function PostList({ isPosting, onStopPosting }) {
+  const [posts, setPosts] = useState([]);
 
-  function bodyChangeHandler(event) {
-    setEnteredBody(event.target.value);
+  function addPostHandler(postData) {
+    setPosts((prevPosts) => [postData, ...prevPosts]);
   }
 
-  function authorChangeHandler(event) {
-    setEnteredBody(event.target.value);
-  }
+  // let modalContent;
+  // if (isPosting) {
+  //   modalContent = (
+  //     <Modal onClose={onStopPosting}>
+  //       <NewPost
+  // onCancel={onStopPosting} onAddPost={addPostHandler}
+  //       />
+  //     </Modal>
+  //   );
+  // }
 
   return (
     <>
-      <Modal>
-        <NewPost
-          onBodyChange={bodyChangeHandler}
-          onAuthorChange={authorChangeHandler}
-        />
-      </Modal>
+      {/* {isPosting ? (
+        <Modal onClose={onStopPosting}>
+          <NewPost
+            onCancel={onStopPosting}  onAddPost={addPostHandler}
+          />
+        </Modal>
+      ) : null} */}
+      {/* {modalContent} */}
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+        </Modal>
+      )}
 
-      <ul className={classes.posts}>
-        <Post author={enteredAuthor} body={enteredBody} />
-        <Post author="Daniel" body="Hey there!" />
-      </ul>
+      {posts.length > 0 && (
+        <ul className={classes.posts}>
+          {posts.map((post, index) => (
+            <Post key={index} author={post.author} body={post.body} />
+          ))}
+        </ul>
+      )}
+      {posts.length === 0 && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet.</h2>
+          <p>Start adding some!</p>
+        </div>
+      )}
     </>
   );
 }

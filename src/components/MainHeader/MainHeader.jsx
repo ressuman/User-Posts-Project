@@ -7,7 +7,7 @@ export default function MainHeader({ onCreatePost }) {
     <header className={classes.header}>
       <h1 className={classes.logo}>
         <MdMessage />
-        React Poster
+        React User Poster
       </h1>
       <p>
         <button className={classes.button} onClick={onCreatePost}>
