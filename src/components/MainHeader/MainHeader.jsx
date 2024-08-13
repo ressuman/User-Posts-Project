@@ -1,5 +1,5 @@
 import { MdPostAdd, MdMessage } from "react-icons/md";
-
+import PropTypes from "prop-types";
 import classes from "./MainHeader.module.css";
 
 export default function MainHeader({ onCreatePost }) {
@@ -18,3 +18,7 @@ export default function MainHeader({ onCreatePost }) {
     </header>
   );
 }
+
+MainHeader.propTypes = {
+  onCreatePost: PropTypes.func.isRequired,
+};

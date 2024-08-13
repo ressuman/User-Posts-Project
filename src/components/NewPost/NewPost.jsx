@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./NewPost.module.css";
+import PropTypes from "prop-types";
 
 export const NewPost = ({ onCancel, onAddPost }) => {
   const [enteredBody, setEnteredBody] = useState("");
@@ -42,4 +43,9 @@ export const NewPost = ({ onCancel, onAddPost }) => {
       </p>
     </form>
   );
+};
+
+NewPost.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onAddPost: PropTypes.func.isRequired,
 };

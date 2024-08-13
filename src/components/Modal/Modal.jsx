@@ -1,4 +1,5 @@
 import classes from "./Modal.module.css";
+import PropTypes from "prop-types";
 
 export const Modal = ({ children, onClose }) => {
   return (
@@ -9,4 +10,9 @@ export const Modal = ({ children, onClose }) => {
       </dialog>
     </>
   );
+};
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
 };

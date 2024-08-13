@@ -3,6 +3,7 @@ import { NewPost } from "../NewPost/NewPost";
 import Post from "../Post/Post";
 import classes from "./PostList.module.css";
 import { Modal } from "../Modal/Modal";
+import PropTypes from "prop-types";
 
 export default function PostList({ isPosting, onStopPosting }) {
   const [posts, setPosts] = useState([]);
@@ -54,3 +55,8 @@ export default function PostList({ isPosting, onStopPosting }) {
     </>
   );
 }
+
+PostList.propTypes = {
+  isPosting: PropTypes.bool.isRequired,
+  onStopPosting: PropTypes.func.isRequired,
+};

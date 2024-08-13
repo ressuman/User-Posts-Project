@@ -1,4 +1,5 @@
 import styles from "./Post.module.css";
+import PropTypes from "prop-types";
 
 export default function Post({ author, body }) {
   return (
@@ -8,3 +9,8 @@ export default function Post({ author, body }) {
     </li>
   );
 }
+
+Post.propTypes = {
+  author: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+};
