@@ -1,4 +1,7 @@
+import { Link, useLoaderData } from "react-router-dom";
+import { Modal } from "../../components/Modal/Modal";
 import classes from "./PostDetails.module.css";
+import axios from "axios";
 
 export const PostDetails = () => {
   const post = useLoaderData();
@@ -28,3 +31,17 @@ export const PostDetails = () => {
     </Modal>
   );
 };
+
+export async function loader({ params }) {
+  const { id } = params;
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_REACT_USER_POSTS_BACKEND_SERVER}/${id}`
+    );
+    return response.data.post;
+  } catch (error) {
+    console.error("Error fetching post details:", error);
+
+    throw new Error("Failed to load post details. Please try again later.");
+  }
+}

@@ -1,73 +1,21 @@
-import { useEffect, useState } from "react";
-import { NewPost } from "../NewPost/NewPost";
 import Post from "../Post/Post";
 import classes from "./PostList.module.css";
-import { Modal } from "../Modal/Modal";
-import PropTypes from "prop-types";
-import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
-export default function PostList({ isPosting, onStopPosting }) {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const response = await axios.get(
-          import.meta.env.VITE_REACT_USER_POSTS_BACKEND_SERVER
-        );
-        setPosts(response.data.posts);
-        console.log(response.data.posts);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    }
-
-    fetchPosts();
-  }, []);
-
-  function addPostHandler(postData) {
-    axios
-      .post(import.meta.env.VITE_REACT_USER_POSTS_BACKEND_SERVER, postData)
-      .then((response) => {
-        console.log("Post successfully created:", response.data.post);
-        setPosts((prevPosts) => [response.data.post, ...prevPosts]);
-      })
-      .catch((error) => {
-        console.error("Error creating post:", error);
-      });
-  }
-
-  // let modalContent;
-  // if (isPosting) {
-  //   modalContent = (
-  //     <Modal onClose={onStopPosting}>
-  //       <NewPost
-  // onCancel={onStopPosting} onAddPost={addPostHandler}
-  //       />
-  //     </Modal>
-  //   );
-  // }
+export default function PostList() {
+  const posts = useLoaderData();
 
   return (
     <>
-      {/* {isPosting ? (
-        <Modal onClose={onStopPosting}>
-          <NewPost
-            onCancel={onStopPosting}  onAddPost={addPostHandler}
-          />
-        </Modal>
-      ) : null} */}
-      {/* {modalContent} */}
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
-        </Modal>
-      )}
-
       {posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
-            <Post key={post.id} author={post.author} body={post.body} />
+            <Post
+              key={post.id}
+              id={post.id}
+              author={post.author}
+              body={post.body}
+            />
           ))}
         </ul>
       )}
@@ -80,8 +28,3 @@ export default function PostList({ isPosting, onStopPosting }) {
     </>
   );
 }
-
-PostList.propTypes = {
-  isPosting: PropTypes.bool.isRequired,
-  onStopPosting: PropTypes.func.isRequired,
-};
