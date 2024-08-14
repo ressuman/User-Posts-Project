@@ -23,6 +23,8 @@ This is the client-side (frontend) part of a Post Management Application built u
     - [Error Handling](#error-handling)
   - [Contributing](#contributing)
   - [License](#license)
+    - [Gif](#gif)
+  - [](#)
 - [React + Vite](#react--vite)
 
 ## Features
@@ -196,6 +198,12 @@ Contributions are welcome! Please follow these steps to contribute:
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+### Gif
+
+Here is an expected gif of the preview of the App(React User Post Management App)
+
+## ![React User Post Management App gif](./src/assets/user-posts.gif)
 
 ---
 
