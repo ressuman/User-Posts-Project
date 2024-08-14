@@ -1,34 +1,47 @@
-Here's a sample `README.md` file for the client-side/frontend of your project:
+# React User Poster - Client-Side (Frontend)
 
-````markdown
-# React User Poster
-
-This project is a simple React-based application for posting messages with an author and body. It provides a user-friendly interface to create, display, and manage posts. The application also integrates with a backend server for storing and retrieving posts.
+This is the client-side (frontend) part of a Post Management Application built using React, Axios, and React Router. The application allows users to create, view, and interact with posts. It provides a user-friendly interface to create, display, and manage posts. The application also integrates with a backend server for storing and retrieving posts.
 
 ## Table of Contents
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup and Installation](#setup-and-installation)
-- [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
+- [React User Poster - Client-Side (Frontend)](#react-user-poster---client-side-frontend)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+  - [Setup and Installation](#setup-and-installation)
+  - [Environment Variables](#environment-variables)
+  - [Running the Application](#running-the-application)
+  - [Available Scripts](#available-scripts)
+  - [Folder Structure](#folder-structure)
+  - [Components Overview](#components-overview)
+    - [`Post`](#post)
+    - [`PostList`](#postlist)
+    - [`NewPost`](#newpost)
+  - [Routing](#routing)
+  - [Loading \& Error Handling](#loading--error-handling)
+    - [Loading State](#loading-state)
+    - [Error Handling](#error-handling)
+  - [Contributing](#contributing)
+  - [License](#license)
+- [React + Vite](#react--vite)
 
 ## Features
 
-- Create new posts with an author and body.
-- Display a list of all posts.
-- Responsive design with Tailwind CSS.
-- Modal-based post creation form.
-- Integration with a RESTful backend API.
-- Prop validation for components to ensure data integrity.
+- **Post Creation**: Users can create new posts with an author and body.
+- **Post Listing**: Posts are fetched from the backend and displayed in a list.
+- **Post Details**: Each post can be clicked to view its details.
+- **Responsive Design**: Built using Tailwind CSS for responsiveness.
+- **Modal-based Post Creation Form**: A modal is used to create new posts.
+- **Integration with Backend**: Communicates with a RESTful backend API.
+- **Prop Validation**: Components use PropTypes for validation to ensure data integrity.
+- **Loading State**: A loading spinner is displayed while data is being fetched.
+- **Error Handling**: Errors during data fetching or post creation are handled gracefully and logged to the console.
 
 ## Technologies Used
 
 - **React**: A JavaScript library for building user interfaces.
 - **Axios**: A promise-based HTTP client for making API requests.
+- **React Router**: For managing navigation within the app.
 - **React Icons**: For adding icons to the UI.
 - **Tailwind CSS**: A utility-first CSS framework for styling.
 - **Vite**: A fast build tool and development server for modern web projects.
@@ -39,18 +52,11 @@ This project is a simple React-based application for posting messages with an au
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/react-user-poster.git
-   cd react-user-poster
-   ```
-````
-
-2. **Navigate to the `client` directory:**
-
-   ```bash
+   git clone <repository-url>
    cd client
    ```
 
-3. **Install dependencies:**
+2. **Install dependencies:**
 
    ```bash
    npm install
@@ -88,6 +94,15 @@ yarn dev
 
 The application will be available at `http://localhost:5173`.
 
+## Available Scripts
+
+In the project directory, you can run:
+
+- `yarn dev`: Starts the development server.
+- `yarn build`: Builds the app for production.
+- `yarn serve`: Serves the production build locally.
+- `yarn lint`: Lints the code using ESLint.
+
 ## Folder Structure
 
 Here's an overview of the project structure:
@@ -111,11 +126,13 @@ Here's an overview of the project structure:
 │   │   └── PostList/
 │   │       ├── PostList.jsx
 │   │       └── PostList.module.css
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .env
-└── package.json
+│   ├── pages/              # Pages
+│   ├── App.jsx             # Main application component
+│   ├── index.css           # Global styles
+│   └── main.jsx            # Entry point
+├── .env                    # Environment variables
+├── package.json            # Project dependencies and scripts
+└── README.md               # Project documentation
 ```
 
 - **MainHeader**: The header component with the logo and a button to create a new post.
@@ -123,6 +140,47 @@ Here's an overview of the project structure:
 - **NewPost**: The form component for creating a new post.
 - **Post**: The component for displaying individual posts.
 - **PostList**: The component that manages and displays the list of posts.
+
+## Components Overview
+
+### `Post`
+
+- **Props**:
+
+  - `id` (string): The unique identifier for the post.
+  - `author` (string): The author of the post.
+  - `body` (string): The content of the post.
+
+- **Usage**: Displays a single post. Clicking on the post redirects to its details page.
+
+### `PostList`
+
+- **Props**: None.
+- **Usage**: Fetches and displays a list of posts. Handles loading and error states.
+
+### `NewPost`
+
+- **Props**:
+
+  - `onAddPost` (function): Callback function to add a new post.
+
+- **Usage**: Provides a form to create a new post.
+
+## Routing
+
+- **`/`**: Home page displaying the list of posts.
+- **`/create-post`**: Page to create a new post.
+- **`/post/:id`**: Post details page for viewing a single post.
+
+## Loading & Error Handling
+
+### Loading State
+
+- A loading spinner is shown while the posts are being fetched. The spinner is managed using the `isFetching` state in the `PostList` component.
+
+### Error Handling
+
+- Errors during the fetching of posts or the creation of a new post are caught using `try/catch` blocks. Errors are logged to the console and can be extended to show error messages to the user.
 
 ## Contributing
 
@@ -139,10 +197,7 @@ Contributions are welcome! Please follow these steps to contribute:
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-```
-
-This `README.md` file provides a comprehensive overview of the frontend part of your project, detailing the setup process, technologies used, and project structure. Feel free to customize it further according to your project's specific needs!
-
+---
 
 # React + Vite
 
@@ -152,4 +207,7 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+```
+
 ```
